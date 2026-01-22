@@ -1,0 +1,22 @@
+saluto = "Hello "
+nome = input("Come ti chiami? ")
+
+print(saluto + nome)
+
+print(f"Il tuo nome è {nome}")
+print(f"Il tuo nome è lungo {len(nome)} caratteri")
+print(f"Il tuo nome maiuscolo {nome.upper()} ")
+
+for carattere in nome:
+    print(carattere)
+
+print(nome[0:3])
+
+carattere = input("Inserisci il carattere da usare: ")
+
+print(((carattere + " ") * 4 + "\n") * 4)
+
+for i in range(4):
+    for j in range(4):
+        print(carattere + " ", end = "")
+    print()
