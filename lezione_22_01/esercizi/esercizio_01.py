@@ -1,4 +1,4 @@
-saluto = "Hello virtual machine!"
+saluto = "hello virtual machine!"
 
 print(saluto)
 
@@ -9,6 +9,7 @@ print(saluto.lower())
 
 #lunghezza della stringa
 lunghezza = len(saluto)
+print(lunghezza)
 
 print(type(lunghezza))
 
