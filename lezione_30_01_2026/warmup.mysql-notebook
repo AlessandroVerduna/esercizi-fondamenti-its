@@ -1,0 +1,185 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "Script",
+    "content": "#creare utente\nCREATE USER user@localhost IDENTIFIED BY 'password';\n\n#creare database\nCREATE DATABASE provamicrofono;\n\n#assegnare permessi a utente su database\nGRANT ALL ON provamicrofono.* TO user@localhost;\n\n#connessione da utente a database\n\n#-------APPUNTI--------\n#mysql -u user -p\n#enter password --> in questo caso è: \"password\". L'abbiamo indicata come password nel primo passaggio\n\n#creazione di tabella\nCREATE TABLE provamicrofono.citta LIKE world.city;\n\n#inserimento / modifica / lettura / eliminazione record\nINSERT INTO provamicrofono.citta SELECT * FROM world.city;\n\nSELECT * FROM provamicrofono.citta;\nSELECT DISTINCT CountryCode FROM provamicrofono.citta;\nSELECT * FROM provamicrofono.citta WHERE CountryCode = 'ITA' AND District = 'Apulia';\n\nSELECT district, SUM(Population) AS Abitanti \nFROM provamicrofono.citta where countrycode = 'ITA'\nGROUP BY district ORDER BY Abitanti DESC;\n\n#eliminazione tabella\ndrop table provamicrofono.citta;\n\n#revocare privilegi\nrevoke all on provamicrofono.* from user@localhost;\n\n#eliminare database \ndrop database provamicrofono;\n\n#eliminare utente\ndrop user user@localhost;\n\n",
+    "options": {
+        "tabSize": 4,
+        "insertSpaces": true,
+        "indentSize": 4,
+        "defaultEOL": "CRLF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": null,
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 42,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 0,
+                            "resultId": "04188390-a85d-4f62-e89b-7711413c1e55",
+                            "content": "OK, 0 records retrieved in 12.593ms"
+                        }
+                    ]
+                },
+                "currentHeight": 300,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 67
+                        },
+                        "contentStart": 15,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 67,
+                            "length": 50
+                        },
+                        "contentStart": 86,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 117,
+                            "length": 91
+                        },
+                        "contentStart": 160,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 208,
+                            "length": 255
+                        },
+                        "contentStart": 413,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 463,
+                            "length": 116
+                        },
+                        "contentStart": 521,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 579,
+                            "length": 37
+                        },
+                        "contentStart": 581,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 616,
+                            "length": 55
+                        },
+                        "contentStart": 617,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 671,
+                            "length": 86
+                        },
+                        "contentStart": 672,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 757,
+                            "length": 141
+                        },
+                        "contentStart": 759,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 898,
+                            "length": 56
+                        },
+                        "contentStart": 923,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 954,
+                            "length": 73
+                        },
+                        "contentStart": 976,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1027,
+                            "length": 52
+                        },
+                        "contentStart": 1051,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1079,
+                            "length": 45
+                        },
+                        "contentStart": 1100,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1124,
+                            "length": 2
+                        },
+                        "contentStart": 1123,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 1,
+                "end": 42,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 336
+                        },
+                        "contentStart": 15,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}
