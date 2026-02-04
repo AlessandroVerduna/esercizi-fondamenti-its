@@ -6,7 +6,7 @@ create table Products(
 	code char(8) primary key,
     name varchar(30),
     price decimal(6,2),
-    quantity int check(quantity < 100)
+    quantity int check(quantity <= 100)
 );
 
 describe products;
@@ -14,7 +14,7 @@ describe products;
 alter table products add column description varchar(100) after name;
 
 create table orders (
-	id int primary key,
+	id int primary key auto_increment,
     order_data date,
     total decimal(10,2),
     shipping enum('delivered', 'shipped', 'ship'),
@@ -42,21 +42,21 @@ create table america (
 	id int primary key,
     state varchar(50),
     capital_id int check( capital_id <= 255),
-    population int check(population < 1428627663)
+    population int check(population < 4500000000)
 );
 
 create table asia (
 	id int primary key,
     state varchar(50),
     capital_id int check( capital_id <= 255),
-    population int check(population < 1428627663)
+    population int check(population < 4500000000)
 );
 
 create table africa (
 	id int primary key,
     state varchar(50),
     capital_id int check( capital_id <= 255),
-    population int check(population < 1428627663)
+    population int check(population < 4500000000)
 );
 
 create table books (

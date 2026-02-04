@@ -1,0 +1,15 @@
+Luca, Bianchi, 3201234567, luca.bianchi@email.it, Via Dante 10, Milano, MI, Lombardia, 20121, 2025-05-01
+
+Giulia, Rossi, 3479876543, giulia.rossi@email.it, Corso Venezia 22, Torino, TO, Piemonte, 10121, 2025-05-03
+
+Marco, Verdi, 3391122334, marco.verdi@email.it, Via Mazzini 18, Bologna, BO, Emilia-Romagna, 40121, 2025-05-05
+
+Elena, Neri, 3284455667, elena.neri@email.it, Piazza Duomo 1, Firenze, FI, Toscana, 50122, 2025-05-07
+
+Paolo, Ricci, 3339988776, paolo.ricci@email.it, Via Garibaldi 55, Napoli, NA, Campania, 80134, 2025-05-10
+
+Sara, Moretti, 3315566778, sara.moretti@email.it, Via Cavour 16, Venezia, VE, Veneto, 30121, 2025-05-12
+
+Davide, Ferrari, 3491122334, davide.ferrari@email.it, Via Manzoni 8, Genova, GE, Liguria, 16121, 2025-05-15
+
+Chiara, Gallo, 3278899001, chiara.gallo@email.it, Via Roma 77, Palermo, PA, Sicilia, 90133, 2025-05-18
