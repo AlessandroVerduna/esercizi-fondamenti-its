@@ -4,7 +4,7 @@ f = open("clienti.txt", "r")
 
 for riga in f:
     riga = riga.replace("\n", "")
-    riga = riga.replace("\t", ",")
+    # riga = riga.replace("\t", ",")
     riga = riga.strip()
     if riga != "":
         clienti.append(riga)

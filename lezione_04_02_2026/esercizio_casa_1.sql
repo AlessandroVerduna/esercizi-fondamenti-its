@@ -55,7 +55,7 @@ create table asia (
 create table africa (
 	id int primary key,
     state varchar(50),
-    capital_id int check( capital_id <= 255),
+    capital_id int check( capital_id <= 255),           #tinyint unsigned --> mi occupa 255 caselle
     population int check(population < 4500000000)
 );
 
