@@ -1,0 +1,10 @@
+insert into orders (order_data, total, shipping, shipping_address, customer_id) values ('2025-06-01', 25.38 ,'shipped', 'Via Roma 12 Milano', 101);
+insert into orders (order_data, total, shipping, shipping_address, customer_id) values ('2025-06-02', 47.20 ,'delivered', 'Corso Italia 45 Torino', 102);
+insert into orders (order_data, total, shipping, shipping_address, customer_id) values ('2025-06-03', 15.90 ,'to ship', 'Via Verdi 8 Firenze', 103);
+insert into orders (order_data, total, shipping, shipping_address, customer_id) values ('2025-06-03', 83.70 ,'shipped', 'Piazza Garibaldi 20 Napoli', 104);
+insert into orders (order_data, total, shipping, shipping_address, customer_id) values ('2025-06-04', 9.99 ,'delivered', 'Via Mazzini 5 Bologna', 101);
+insert into orders (order_data, total, shipping, shipping_address, customer_id) values ('2025-06-05', 29.50 ,'to ship', 'Via Cavour 3 Venezia', 102);
+insert into orders (order_data, total, shipping, shipping_address, customer_id) values ('2025-06-06', 12.75 ,'shipped', 'Via Amendola 14 Bari', 103);
+insert into orders (order_data, total, shipping, shipping_address, customer_id) values ('2025-06-07', 65.00 ,'delivered', 'Corso Garibaldi 101 Genova', 104);
+insert into orders (order_data, total, shipping, shipping_address, customer_id) values ('2025-06-07', 19.80 ,'to ship', 'Via Marconi 22 Palermo', 101);
+insert into orders (order_data, total, shipping, shipping_address, customer_id) values ('2025-06-08', 34.60 ,'shipped', 'Via Leopardi 9 Verona', 102);

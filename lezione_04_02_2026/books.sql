@@ -1,0 +1,7 @@
+insert into books (isbn, title, price, price_vat, pages, editor_id) values ('9788801234567', 'La coscienza di Zeno' ,15.00, 18.30, 250, 1);
+insert into books (isbn, title, price, price_vat, pages, editor_id) values ('9788804567890', 'Il nome della rosa' ,20.00, 24.40, 512, 2);
+insert into books (isbn, title, price, price_vat, pages, editor_id) values ('9788867890123', 'I promessi sposi' ,18.50, 22.57, 600, 1);
+insert into books (isbn, title, price, price_vat, pages, editor_id) values ('9788876543210', 'Se questo è un uomo' ,14.00, 17.08, 180, 3);
+insert into books (isbn, title, price, price_vat, pages, editor_id) values ('9788898765432', 'Il Gattopardo' ,22.00, 26.84, 350, 2);
+insert into books (isbn, title, price, price_vat, pages, editor_id) values ('9788812345678', 'La storia' ,19.00, 23.18, 430, 3);
+insert into books (isbn, title, price, price_vat, pages, editor_id) values ('9788823456789', 'Cristo si è fermato a Eboli' ,16.50, 20.13, 300, 1);
