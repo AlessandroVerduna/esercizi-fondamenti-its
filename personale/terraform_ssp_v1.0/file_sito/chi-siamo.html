@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chi siamo - Progetto Storiografico</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">Progetto Storiografico</a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <a href="materiale.html">Materiale storiografico</a>
+        <a href="collabora.html">Collabora con noi</a>
+        <a href="eventi.html">Eventi</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Apri menu">☰</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Chi siamo</h1>
+      <p>Siamo un gruppo di ricercatori, archivisti e volontari impegnati nella conservazione della memoria storica locale e nazionale.</p>
+    </section>
+
+    <section>
+      <h2>Il nostro team</h2>
+      <ul class="team-list">
+        <li><strong>Dr. Maria Rossi</strong> — Coordinamento scientifico</li>
+        <li><strong>Prof. Luca Bianchi</strong> — Archivistica</li>
+        <li><strong>Volontari</strong> — Digitalizzazione e catalogazione</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Contatti</h2>
+      <p>Email: <a href="mailto:info@progettostoriografico.it">info@progettostoriografico.it</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Progetto Storiografico</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', () => {
+      document.querySelector('.main-nav').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
