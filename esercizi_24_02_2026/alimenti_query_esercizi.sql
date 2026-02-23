@@ -51,10 +51,13 @@ select categoria, count(*) as numero_elementi_per_categoria from alimenti group 
 select categoria, avg(carboidrati) as media_carboidrati from alimenti group by categoria order by media_carboidrati desc;
 
 # 7-----------------------------------------
-select categoria, avg(carboidrati) as media_carboidrati from alimenti group by categoria order by media_carboidrati desc limit 1;
+select categoria, avg(energia) as media_energia from alimenti group by categoria order by media_carboidrati desc limit 1;
 
 # 8-----------------------------------------
 select * from alimenti order by proteine desc limit 1;
+
+# ^^Correzione. La mia soluzione è quella di sopra. Molto interessante la sintassi della sub-query ^^
+select prodotto, proteine from alimenti where proteine = (select max(proteine) from alimenti);
 
 # 9-----------------------------------------
 select categoria, sum(energia) as somma_energia from alimenti group by categoria order by somma_energia desc;
