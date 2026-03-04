@@ -82,5 +82,28 @@ select * from (select nome, count(distinct genere) as numero_giochi from games g
 select nome, count(distinct genere) as numero_giochi from games group by nome having numero_giochi > 1 order by numero_giochi desc;
 
 # 25-------------------------------------------------
+select distinct genere, max(totale_giochi) as totale_giochi from 
+(select genere, publisher, count(*) as totale_giochi from games group by genere, publisher) as tabella 
+group by genere order by totale_giochi desc;
+
+# SOLUZIONE PROVVISORIA
 
 # 26-------------------------------------------------
+select platform, nome, year from games where (platform, year ) in 
+(select platform, min(year) as anno_minimo from games where platform not like '%,%' group by platform);
+
+# 27-------------------------------------------------
+select nome, publisher, genere from games where nome in 
+(select nome from games group by nome having count(distinct genere) > 1 or count(distinct publisher) >1);
+
+# 28-------------------------------------------------
+select genere, round((count(*) * 100)/(select count(*) from games), 2) as totale 
+from games group by genere order by totale desc;
+
+# 29-------------------------------------------------
+select rank() over (order by count(*) desc) as ranking, publisher, count(*) as numero_giochi
+from games group by publisher order by numero_giochi desc;
+
+# 30-------------------------------------------------
+select year, genere, count(*) as totale_giochi, rank() over (partition by year order by count(*) desc) as classifica
+from games group by year, genere order by year, classifica;
