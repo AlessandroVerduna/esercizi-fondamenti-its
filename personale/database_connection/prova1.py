@@ -18,6 +18,6 @@ records = cursor.fetchall()
 
 f = open("record.txt", "w")
 for i in records:
-    f.write(f"{i}\t")
+    f.write(f"{i}")
     f.write("\n")
 f.close()
