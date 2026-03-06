@@ -17,7 +17,6 @@ while verifica == True:
         if a == 0 and b != 0:
             print("Numeri validi. Calcolo la risposta\n...\n...\n...")
             print("Il valore di X è: impossibile")
-            break
         elif a == 0 and b == 0:
             print("Numeri validi. Calcolo la risposta\n...\n...\n...")
             print("Il valore di X è: indeterminato")
