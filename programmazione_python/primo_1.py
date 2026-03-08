@@ -13,7 +13,10 @@ print("Dopo che mi avrai fornito due variabili A e B ti troverò il valore di X 
 verifica = True
 while verifica == True:
     try:
+        # Richiesta delle variabili in INPUT
         a,b = map(float,input("Inserisci il valore di A e il valore di B (separati da uno spazio): ").split())
+        
+        # Esplicitazione, con logica, dei tre possibili casi: risultato calcolabile, indetermianto o impossibile
         if a == 0 and b != 0:
             print("Numeri validi. Calcolo la risposta\n...\n...\n...")
             print("Il valore di X è: impossibile")
@@ -24,7 +27,9 @@ while verifica == True:
             x = b / a
             print("Numeri validi. Calcolo la risposta\n...\n...\n...")
             print(f"Il valore di X è: {x}")
-    except:
+    except: 
+        # Verifivca che siano inseriti valori accettati (es. no lettere)
         print("Inserisci dei numeri ed inseriscine due separati da uno spazio, altri caratteri non sono accettati")
     else:
+        # Ferma il ciclo while
         verifica = False
