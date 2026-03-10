@@ -16,7 +16,7 @@ class H(BaseHTTPRequestHandler):
 
         elif self.path == "/version":
 
-            body = json.dumps({"version": os.environ.get("APP_VERSION")})
+            body = json.dumps({"version": os.environ.get("APP_VERSION", "1.0")})
 
         else:
 
