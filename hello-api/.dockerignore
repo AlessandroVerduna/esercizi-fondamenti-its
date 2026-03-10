@@ -1,0 +1,4 @@
+* .pvc
+__pychache__/
+.git/
+.env
