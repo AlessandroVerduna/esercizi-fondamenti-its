@@ -9,3 +9,5 @@ crash.log
 
 # Sensitive files
 *.tfvars
+
+__pychache__/*
