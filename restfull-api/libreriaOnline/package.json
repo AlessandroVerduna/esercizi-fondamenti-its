@@ -1,0 +1,16 @@
+{
+  "name": "libreriaonline",
+  "version": "1.0.0",
+  "description": "Proegtto di prova di una libreria online",
+  "license": "ISC",
+  "author": "Verduna",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
+}

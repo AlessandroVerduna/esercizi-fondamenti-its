@@ -1,0 +1,68 @@
+const catalogoLibri = [
+    {
+        "libroId": 1,
+        "titolo": "Miao",
+        "genere": "horror",
+        "autore": "Sun Tzu",
+        "editore": "Miao INC",
+        "numeroPagine": 50
+    },
+    {
+        "libroId": 2,
+        "titolo": "Bau",
+        "genere": "horror",
+        "autore": "Macchiavelli",
+        "editore": "Bau INC",
+        "numeroPagine": 50
+    },
+    {
+        "libroId": 3,
+        "titolo": "Muu",
+        "genere": "splatter",
+        "autore": "Er Serpico",
+        "editore": "Muu INC",
+        "numeroPagine": 851
+    },
+    {
+        "libroId": 4,
+        "titolo": "Oink",
+        "genere": "fantasy",
+        "autore": "Uomo Gatto",
+        "editore": "Oink INC",
+        "numeroPagine": 741
+    },
+    {
+        "libroId": 5,
+        "titolo": "Pss",
+        "genere": "romanzo di formazione",
+        "autore": "Tony Pitony",
+        "editore": "Pss INC",
+        "numeroPagine": 3
+    },
+    {
+        "libroId": 5,
+        "titolo": "Pss",
+        "genere": "romanzo di formazione",
+        "autore": "Tony Pitony",
+        "editore": "Pss INC",
+        "numeroPagine": 3
+    },
+    {
+        "libroId": 5,
+        "titolo": "Pss",
+        "genere": "romanzo di formazione",
+        "autore": "Tony Pitony",
+        "editore": "Pss INC",
+        "numeroPagine": 3
+    },
+    {
+        "libroId": 5,
+        "titolo": "Pss",
+        "genere": "romanzo di formazione",
+        "autore": "Tony Pitony",
+        "editore": "Pss INC",
+        "numeroPagine": 3
+    }
+];
+
+export default catalogoLibri;
