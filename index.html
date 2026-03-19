@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalogo Libri</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #444;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #ddd;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Catalogo Libri</h1>
+
+    <table id="tabellaLibri">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titolo</th>
+                <th>Genere</th>
+                <th>Autore</th>
+                <th>Editore</th>
+                <th>Pagine</th>
+            </tr>
+        </thead>
+        <tbody id="corpoTabella">
+            <!-- I dati verranno inseriti qui -->
+        </tbody>
+    </table>
+
+    <script>
+        fetch("catalogo.json")
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.getElementById("corpoTabella");
+
+                data.forEach(libro => {
+                    const row = document.createElement("tr");
+
+                    row.innerHTML = `
+                        <td>${libro.libroId}</td>
+                        <td>${libro.titolo}</td>
+                        <td>${libro.genere}</td>
+                        <td>${libro.autore}</td>
+                        <td>${libro.editore}</td>
+                        <td>${libro.numeroPagine}</td>
+                    `;
+
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(err => {
+                document.body.innerHTML += "<p>Errore nel caricamento: " + err + "</p>";
+            });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+    "libro":{
+        "libroId": 1,
+        "titolo": "Miao",
+        "genere": "horror",
+        "autore": "Sun Tzu",
+        "editore": "Miao INC",
+        "numeroPagine": 50
+    }
+}
