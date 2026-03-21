@@ -2,67 +2,39 @@
     Autore: Alessandro Verduna
     Data: 20/03/2026
     
-    Consegna: Primo Esercizio
-        Creare una funzione che riceva una quantità di tempo in formato ore, minuti e secondi e la
-        restituisca espressa solamente in secondi. Successivamente creare un programma
-        principale che chieda in input due quantità di tempo e stampi in output quale quantità di
-        tempo è maggiore. La funzione deve avere i parametri formali con valori predefiniti.
+    Consegna: Secondo Esercizio
+        Creare una funzione che abbia come parametri formali un numero arbitrario di valori numerici. 
+        Si vuole che restituisca la somma dei soli numeri pari e il prodotto dei soli numeri dispari. 
+        Successivamente creare un programma che richiami tale funzione e che stampi in output i risultati. 
+        No standard input. 
 """
 
-def return_time_in_seconds(ore, minuti, secondi):
-    return ore * 3600 + minuti * 60 + secondi
-
-def bigger_time_given(ora_a = 1, minuti_a = 40, secondi_a = 20, ora_b = 2, minuti_b = 50, secondi_b = 11):
-    if ora_a > ora_b:
-        return "Il primo orario fornito è più grande"
-    elif ora_b > ora_a:
-        return "Il secondo orario fornito è più grande"
-    elif minuti_a > minuti_b:
-        return "Il primo orario fornito è più grande"
-    elif minuti_b > minuti_a:
-        return "Il secondo orario fornito è più grande"
-    elif secondi_a > secondi_b:
-        return "Il primo orario fornito è più grande"
-    elif secondi_b > secondi_a:
-        return "Il secondo orario fornito è più grande"
-    else:
-        return "I due orari sono uguali!"
-
-def validation_input():
-    verificatore = False
-    while verificatore == False:
-        input_ore = int(input("Inserisci qui il numero di ore: "))
-        input_minuti = int(input("Inserisci qui il numero di minuti: "))
-        input_secondi = int(input("Inserisci qui il numero di secondi: "))
-        
-        if input_ore < 0:
-            print("Valore di riferimento delle ore non valido")
-        elif input_minuti < 0 or input_minuti > 59:
-            print("Valore di riferimento dei minuti non valido")
-        elif input_secondi < 0 or input_secondi > 59:
-            print("Valore di riferimento dei secondi non valido")
+def somma_pari_e_prodotto_dispari(*numeri):
+    """
+    Esegue la somma per i valori pari mentre esegue la moltiplicazione dei valori dispari.
+    Parametri:
+        Forniti nel main(), sono hardcoded e sono numeri interi pari e dispari
+    Ritorna:
+       somma_pari (int): la somma dei numeri pari 
+       prodotto_dispari (int): prodotto dei numeri dispari
+    """
+    somma_pari = 0
+    prodotto_dispari = 1
+    for numero in numeri:
+        if numero % 2 == 0:
+            somma_pari += numero
         else:
-            verificatore = True 
+            prodotto_dispari *= numero
+    return somma_pari, prodotto_dispari
 
-def main():   
-    # verificatore = False
-    # while verificatore == False:
-    #     input_ore = int(input("Inserisci qui il numero di ore: "))
-    #     input_minuti = int(input("Inserisci qui il numero di minuti: "))
-    #     input_secondi = int(input("Inserisci qui il numero di secondi: "))
-        
-    #     if input_ore < 0:
-    #         print("Valore di riferimento delle ore non valido")
-    #     elif input_minuti < 0 or input_minuti > 59:
-    #         print("Valore di riferimento dei minuti non valido")
-    #     elif input_secondi < 0 or input_secondi > 59:
-    #         print("Valore di riferimento dei secondi non valido")
-    #     else:
-    #         verificatore = True
-            
-    print(f"L'orario fornito equivale a: {return_time_in_seconds(input_ore, input_minuti, input_secondi)} secondi")
-
-    print(bigger_time_given())
+def main():
+    """
+    Funzione principale del programma.
+    Dati dei valori predefiniti in input alla funzione somma_pari_e_prodotto_dispari()
+    vengono poi stampati i risulati ritornati dalla funzione stessa (somma_pari, prodotto_dispari)
+    """
+    somma_pari, prodotto_dispari = somma_pari_e_prodotto_dispari(4, 4, 5, 3, 2, 3)
+    print(f"La somma dei numeri pari è: {somma_pari} e il prodotto dei numeri dispari è: {prodotto_dispari}")
 
 if __name__ == "__main__":
     main()
