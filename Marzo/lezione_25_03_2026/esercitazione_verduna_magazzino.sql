@@ -149,11 +149,19 @@ where categorie.nome = 'elettronica';
 
 # Query di Aggregazione e Funzioni (Statistiche)
 # Contare quanti prodotti ci sono in totale nel database.
-
+select count(*) as prodotti_totali from prodotti;
 
 # Calcolare il prezzo medio dei prodotti.
+select avg(prezzo_unitario) as 'media prezzi prodotti' from prodotti;
+
 # Calcolare la somma totale degli articoli in magazzino.
+select sum(prezzo_unitario) as 'totale prezzo degli articoli' from prodotti;
+
 # Trovare il prezzo massimo per ogni categoria.
+select categorie.nome, max(prodotti.prezzo_unitario) as prezzo_massimo
+from prodotti join categorie using(id_categoria)
+group by categorie.nome order by prezzo_massimo desc;
+
 # Contare quanti prodotti fornisce ogni fornitore.
 # Calcolare il valore totale economico del magazzino intero.
 # Mostrare le categorie che hanno più di 2 prodotti.
