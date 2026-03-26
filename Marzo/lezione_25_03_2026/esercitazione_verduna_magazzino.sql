@@ -163,10 +163,29 @@ from prodotti join categorie using(id_categoria)
 group by categorie.nome order by prezzo_massimo desc;
 
 # Contare quanti prodotti fornisce ogni fornitore.
+select fornitori.ragione_sociale, count(*) as 'prodotti per fornitore'
+from prodotti join fornitori using (id_fornitore)
+group by fornitori.ragione_sociale;
+
 # Calcolare il valore totale economico del magazzino intero.
+select sum(quantita_stock * prezzo_unitario) as 'valore totale del magazzino'
+from prodotti;
+
 # Mostrare le categorie che hanno più di 2 prodotti.
+select categorie.nome, count(*) as numero_prodotti
+from prodotti join categorie using(id_categoria)
+group by categorie.nome having numero_prodotti > 2
+order by numero_prodotti desc;
+
 # Trovare il fornitore che ha il prodotto più economico.
+select fornitori.ragione_sociale, min(prodotti.prezzo_unitario) as prezzo_minimo_prodotto
+from prodotti join fornitori using(id_fornitore)
+group by fornitori.ragione_sociale limit 1;
+
 # Calcolare la media dei prezzi dei prodotti per il fornitore 'TechSpA'.
+select fornitori.ragione_sociale, avg(prodotti.prezzo_unitario) as prezzo_medio_prodotto
+from prodotti join fornitori using(id_fornitore)
+group by fornitori.ragione_sociale having fornitori.ragione_sociale = 'TechSPA';
+
 # Visualizzare le categorie e il numero di pezzi totali (somma stock) per ognuna.
-# Esempio di risoluzione (Query 25 & 27)
-# Se vuoi testare la logica più complessa:
+

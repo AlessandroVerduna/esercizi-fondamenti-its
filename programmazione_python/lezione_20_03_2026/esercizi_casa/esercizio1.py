@@ -54,18 +54,21 @@ def input_and_validation():
     """
     correttezza_input = False
     while correttezza_input != True:
-        input_ore = int(input("Inserisci qui il numero di ore: "))
-        input_minuti = int(input("Inserisci qui il numero di minuti: "))
-        input_secondi = int(input("Inserisci qui il numero di secondi: "))
+        input_ore = input("Inserisci qui il numero di ore: ")
+        input_minuti = input("Inserisci qui il numero di minuti: ")
+        input_secondi = input("Inserisci qui il numero di secondi: ")
         
-        if input_ore < 0:
-            print("Valore di riferimento delle ore non valido")
-        elif input_minuti < 0 or input_minuti > 59:
-            print("Valore di riferimento dei minuti non valido")
-        elif input_secondi < 0 or input_secondi > 59:
-            print("Valore di riferimento dei secondi non valido")
+        if isinstance(input_ore, int) and isinstance(input_minuti, int) and isinstance(input_secondi, int):
+            if input_ore < 0:
+                print("Valore di riferimento delle ore non valido")
+            elif input_minuti < 0 or input_minuti > 59:
+                print("Valore di riferimento dei minuti non valido")
+            elif input_secondi < 0 or input_secondi > 59:
+                print("Valore di riferimento dei secondi non valido")
+            else:
+                correttezza_input = True
         else:
-            correttezza_input = True
+            print("Valore numero inserito in formato non valido. Inserire solo interi")
     return input_ore, input_minuti, input_secondi 
 
 def main():   
