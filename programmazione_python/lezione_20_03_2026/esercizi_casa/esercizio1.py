@@ -59,7 +59,7 @@ def input_and_validation():
         input_secondi = input("Inserisci qui il numero di secondi: ")
         
         #if (input_ore is int) and (input_minuti is int) and (input_secondi is int):
-        if isinstance(input_ore, int) and isinstance(input_minuti, int) and isinstance(input_secondi, int):
+        #if isinstance(input_ore, int) and isinstance(input_minuti, int) and isinstance(input_secondi, int):
             if input_ore < 0:
                 print("Valore di riferimento delle ore non valido")
             elif input_minuti < 0 or input_minuti > 59:
