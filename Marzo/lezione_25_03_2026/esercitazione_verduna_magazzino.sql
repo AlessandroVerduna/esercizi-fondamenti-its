@@ -188,4 +188,7 @@ from prodotti join fornitori using(id_fornitore)
 group by fornitori.ragione_sociale having fornitori.ragione_sociale = 'TechSPA';
 
 # Visualizzare le categorie e il numero di pezzi totali (somma stock) per ognuna.
-
+select categorie.nome, sum(prodotti.quantita_stock) as somma_stock
+from prodotti join categorie using(id_categoria)
+group by categorie.nome
+order by somma_stock desc;
