@@ -11,7 +11,10 @@
 
 def logica(listaIN_locale):
     """
+    Rimuove i duplicati dalla lista mantenendo l'ordine originale.
     
+    Scorre la lista in ingresso e aggiunge ogni elemento solo se
+    non è già presente nella lista di output.
     """
     listaOUT_locale = []
     for elemento in listaIN_locale:
@@ -25,7 +28,10 @@ def logica(listaIN_locale):
 
 def main():
     """
-    
+    Funzione principale del programma.
+
+    Definisce due liste predefinite, richiama la funzione logica()
+    per verificare se hanno elementi in comune e stampa il risultato.
     """
     listaOUT = []
     listaIN = [2,-4,5,6,5,5,2, 2, 2, 55]

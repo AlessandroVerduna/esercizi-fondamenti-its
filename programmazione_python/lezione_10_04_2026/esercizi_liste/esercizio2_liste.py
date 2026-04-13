@@ -12,7 +12,8 @@
 
 def logica(lista1_local, lista2_local):
     """
-    
+    Verifica se le due liste hanno almeno un elemento in comune
+    e stampa il risultato.
     """
     verificatore = False
     for elemento in lista1_local:
@@ -20,14 +21,17 @@ def logica(lista1_local, lista2_local):
             verificatore = True
             
     if verificatore == True:
-        print("C'è un elemento in comune tra le due liste")
+        print("OK")
     else:
-        print("Non c'è un elemento in comune tra le due liste")
+        print("KO")
 
 
 def main():
     """
-    
+    Funzione principale del programma.
+
+    Definisce due liste predefinite, richiama la funzione logica()
+    per verificare se hanno elementi in comune e stampa il risultato.
     """
     lista1=[1,5,8] 
     lista2=[3,1,10]
