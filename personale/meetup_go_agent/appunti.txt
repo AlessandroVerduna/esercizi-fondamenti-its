@@ -1,0 +1,11 @@
+Per un LLM mi serve un'interfaccia. Una funzione che prende parametri e ritorna una risposta. 
+Biosgna usare Generate. I parametri sono:
+    - il nome del modello,
+    -system prompt,
+    -messaggio:
+        -ruolo,
+        -content,
+        -toolcallid,
+        -toolcal
+    -tools
+I Tool non possono agire sul mondo ma attraverso i tool lo possono fare. 

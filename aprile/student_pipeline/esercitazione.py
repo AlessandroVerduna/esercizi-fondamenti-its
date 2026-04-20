@@ -93,10 +93,22 @@ with open(f"data/input/studenti{ora_corrente}.csv", "r", encoding="utf-8") as f:
     reader = csv.DictReader(f)
     
     pattern_email = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+    pattern_data = r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$"
     
+    lista_scartati = []
+    lista_validi = []
+    email_non_valida = 0
+    data_non_valida = 0
+
     for riga in reader:
-        print(riga["email"])
-        if re.match(pattern_email, riga["email"]) is not None:
-            print("Good job!")
+        if re.match(pattern_email, riga["email"]) is None:
+            email_non_valida += 1
+            lista_scartati += riga
+        elif re.match(pattern_data, riga["data_nascita"]) is None:
+            data_non_valida += 1
+            lista_scartati += riga
         else:
-            print("Svegliati")
+            lista_validi += riga
+    print(f"Numero email non valide: {email_non_valida} e numero date non valide {data_non_valida}")
+
+            
