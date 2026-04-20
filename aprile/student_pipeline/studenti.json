@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "nome": "Gianni",
+        "cognome": "Bianchi",
+        "data_nascita": "2005-06-27",
+        "email": "gianni.bianchi@scuola.it"
+    },
+    {
+        "id": 2,
+        "nome": "Alessandro",
+        "cognome": "Rossi",
+        "data_nascita": "2004-07-19",
+        "email": "alessandro.rossi@scuola.it"
+    },
+    {
+        "id": 3,
+        "nome": "Pippo",
+        "cognome": "Rossi",
+        "data_nascita": "2006-06-17",
+        "email": "pippo.rossi@scuola.it"
+    },
+    {
+        "id": 4,
+        "nome": "Gianni",
+        "cognome": "Bianchi",
+        "data_nascita": "2005-08-22",
+        "email": "gianni.bianchi@scuola.it"
+    }
+]
