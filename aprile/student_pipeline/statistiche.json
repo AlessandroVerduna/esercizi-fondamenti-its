@@ -1,0 +1,23 @@
+{
+    "matematica": {
+        "media": 5.5,
+        "mediana": 5.5,
+        "min": 2,
+        "max": 9,
+        "stdev": 3.109126351029605
+    },
+    "informatica": {
+        "media": 7,
+        "mediana": 7.5,
+        "min": 4,
+        "max": 9,
+        "stdev": 2.160246899469287
+    },
+    "italiano": {
+        "media": 6.25,
+        "mediana": 7.0,
+        "min": 3,
+        "max": 8,
+        "stdev": 2.3629078131263044
+    }
+}

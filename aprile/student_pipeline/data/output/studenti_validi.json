@@ -1,50 +1,42 @@
 [
     {
-        "id": 1,
+        "id": "1",
         "nome": "Sara",
         "cognome": "Bianchi",
         "data_nascita": "2006-05-02",
         "email": "sara.bianchi@scuola.it",
-        "voti": {
-            "Matematica": 2,
-            "Informatica": 4,
-            "Italiano": 8
-        }
+        "matematica": "2",
+        "informatica": "4",
+        "italiano": "8"
     },
     {
-        "id": 2,
+        "id": "2",
         "nome": "Mario",
         "cognome": "Rossi",
         "data_nascita": "2005-03-07",
         "email": "mario.rossi@scuola.it",
-        "voti": {
-            "Matematica": 7,
-            "Informatica": 8,
-            "Italiano": 8
-        }
+        "matematica": "7",
+        "informatica": "8",
+        "italiano": "8"
     },
     {
-        "id": 3,
+        "id": "3",
         "nome": "Sara",
         "cognome": "Rossi",
         "data_nascita": "2006-09-07",
         "email": "sara.rossi@scuola.it",
-        "voti": {
-            "Matematica": 4,
-            "Informatica": 7,
-            "Italiano": 3
-        }
+        "matematica": "4",
+        "informatica": "7",
+        "italiano": "3"
     },
     {
-        "id": 4,
+        "id": "4",
         "nome": "Gianni",
         "cognome": "Bianchi",
         "data_nascita": "2005-11-05",
         "email": "gianni.bianchi@scuola.it",
-        "voti": {
-            "Matematica": 9,
-            "Informatica": 9,
-            "Italiano": 6
-        }
+        "matematica": "9",
+        "informatica": "9",
+        "italiano": "6"
     }
 ]
