@@ -1,0 +1,242 @@
+[
+    {
+        "id": 1,
+        "nome": "Pippo",
+        "cognome": "Bianchi",
+        "data_nascita": "2004-11-07",
+        "email": "pippo.bianchi@scuola.it",
+        "voti": {
+            "Matematica": 8,
+            "Informatica": 9,
+            "Italiano": 9
+        }
+    },
+    {
+        "id": 2,
+        "nome": "Gianni",
+        "cognome": "Bianchi",
+        "data_nascita": "2006-04-13",
+        "email": "gianni.bianchi@scuola.it",
+        "voti": {
+            "Matematica": 4,
+            "Informatica": 5,
+            "Italiano": 6
+        }
+    },
+    {
+        "id": 3,
+        "nome": "Gianni",
+        "cognome": "Rossi",
+        "data_nascita": "2006-10-26",
+        "email": "gianni.rossi@scuola.it",
+        "voti": {
+            "Matematica": 3,
+            "Informatica": 8,
+            "Italiano": 4
+        }
+    },
+    {
+        "id": 4,
+        "nome": "Gianni",
+        "cognome": "Rossi",
+        "data_nascita": "2006-05-18",
+        "email": "gianni.rossi@scuola.it",
+        "voti": {
+            "Matematica": 3,
+            "Informatica": 4,
+            "Italiano": 5
+        }
+    },
+    {
+        "id": 5,
+        "nome": "Alessandro",
+        "cognome": "Bianchi",
+        "data_nascita": "2005-10-10",
+        "email": "alessandro.bianchi@scuola.it",
+        "voti": {
+            "Matematica": 7,
+            "Informatica": 7,
+            "Italiano": 5
+        }
+    },
+    {
+        "id": 6,
+        "nome": "Pippo",
+        "cognome": "Bianchi",
+        "data_nascita": "2005-06-23",
+        "email": "pippo.bianchi@scuola.it",
+        "voti": {
+            "Matematica": 3,
+            "Informatica": 3,
+            "Italiano": 1
+        }
+    },
+    {
+        "id": 7,
+        "nome": "Sara",
+        "cognome": "Bianchi",
+        "data_nascita": "2006-06-09",
+        "email": "sara.bianchi@scuola.it",
+        "voti": {
+            "Matematica": 2,
+            "Informatica": 3,
+            "Italiano": 9
+        }
+    },
+    {
+        "id": 8,
+        "nome": "Alessandro",
+        "cognome": "Bianchi",
+        "data_nascita": "2004-10-12",
+        "email": "alessandro.bianchi@scuola.it",
+        "voti": {
+            "Matematica": 7,
+            "Informatica": 6,
+            "Italiano": 4
+        }
+    },
+    {
+        "id": 9,
+        "nome": "Mario",
+        "cognome": "Bianchi",
+        "data_nascita": "2004-12-03",
+        "email": "mario.bianchi@scuola.it",
+        "voti": {
+            "Matematica": 7,
+            "Informatica": 10,
+            "Italiano": 10
+        }
+    },
+    {
+        "id": 10,
+        "nome": "Sara",
+        "cognome": "Rossi",
+        "data_nascita": "2004-08-12",
+        "email": "sara.rossi@scuola.it",
+        "voti": {
+            "Matematica": 4,
+            "Informatica": 2,
+            "Italiano": 7
+        }
+    },
+    {
+        "id": 11,
+        "nome": "Gianni",
+        "cognome": "Rossi",
+        "data_nascita": "2005-07-23",
+        "email": "gianni.rossi@scuola.it",
+        "voti": {
+            "Matematica": 4,
+            "Informatica": 6,
+            "Italiano": 1
+        }
+    },
+    {
+        "id": 12,
+        "nome": "Mario",
+        "cognome": "Rossi",
+        "data_nascita": "2006-01-25",
+        "email": "mario.rossi@scuola.it",
+        "voti": {
+            "Matematica": 5,
+            "Informatica": 2,
+            "Italiano": 3
+        }
+    },
+    {
+        "id": 13,
+        "nome": "Gianni",
+        "cognome": "Bianchi",
+        "data_nascita": "2004-05-15",
+        "email": "gianni.bianchi@scuola.it",
+        "voti": {
+            "Matematica": 6,
+            "Informatica": 1,
+            "Italiano": 10
+        }
+    },
+    {
+        "id": 14,
+        "nome": "Pippo",
+        "cognome": "Bianchi",
+        "data_nascita": "2005-10-02",
+        "email": "pippo.bianchi@scuola.it",
+        "voti": {
+            "Matematica": 2,
+            "Informatica": 1,
+            "Italiano": 8
+        }
+    },
+    {
+        "id": 15,
+        "nome": "Alessandro",
+        "cognome": "Rossi",
+        "data_nascita": "2005-06-05",
+        "email": "alessandro.rossi@scuola.it",
+        "voti": {
+            "Matematica": 9,
+            "Informatica": 6,
+            "Italiano": 6
+        }
+    },
+    {
+        "id": 16,
+        "nome": "Mario",
+        "cognome": "Rossi",
+        "data_nascita": "2006-09-28",
+        "email": "mario.rossi@scuola.it",
+        "voti": {
+            "Matematica": 2,
+            "Informatica": 6,
+            "Italiano": 5
+        }
+    },
+    {
+        "id": 17,
+        "nome": "Sara",
+        "cognome": "Bianchi",
+        "data_nascita": "2005-04-10",
+        "email": "sara.bianchi@scuola.it",
+        "voti": {
+            "Matematica": 5,
+            "Informatica": 1,
+            "Italiano": 4
+        }
+    },
+    {
+        "id": 18,
+        "nome": "Mario",
+        "cognome": "Rossi",
+        "data_nascita": "2004-03-10",
+        "email": "mario.rossi@scuola.it",
+        "voti": {
+            "Matematica": 5,
+            "Informatica": 6,
+            "Italiano": 8
+        }
+    },
+    {
+        "id": 19,
+        "nome": "Gianni",
+        "cognome": "Bianchi",
+        "data_nascita": "2006-07-06",
+        "email": "gianni.bianchi@scuola.it",
+        "voti": {
+            "Matematica": 5,
+            "Informatica": 4,
+            "Italiano": 6
+        }
+    },
+    {
+        "id": 20,
+        "nome": "Pippo",
+        "cognome": "Bianchi",
+        "data_nascita": "2005-12-08",
+        "email": "pippo.bianchi@scuola.it",
+        "voti": {
+            "Matematica": 3,
+            "Informatica": 8,
+            "Italiano": 7
+        }
+    }
+]
