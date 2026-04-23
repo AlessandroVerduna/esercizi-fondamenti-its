@@ -49,4 +49,61 @@ join clienti using(id_cliente)
 join prodotti using(id_prodotto);
 
 # Conta quanti ordini ha effettuato ogni cliente.
+select clienti.id_cliente, clienti.nome, count(*) as numero_ordini
+from clienti 
+join ordini using (id_cliente)
+group by clienti.id_cliente, clienti.nome;
 
+# Mostra solo i clienti che hanno effettuato più di un ordine.
+select clienti.id_cliente, clienti.nome, count(*) as numero_ordini
+from clienti 
+join ordini using (id_cliente)
+group by clienti.id_cliente, clienti.nome
+having numero_ordini > 1;
+
+# Calcola il totale speso da ogni cliente.
+select clienti.id_cliente, clienti.nome, sum(prodotti.prezzo) as somma_ordini
+from clienti 
+join ordini using (id_cliente)
+join prodotti using (id_prodotto)
+group by clienti.id_cliente, clienti.nome;
+
+# 5. Update e Delete con Vincoli
+SET SQL_SAFE_UPDATES = 0;
+
+# Aggiorna il prezzo del prodotto "Lavatrice" portandolo a 1300.00.
+UPDATE prodotti
+SET prezzo = 1300
+WHERE nome = 'lavatrice';
+
+# Prova a eliminare un cliente che ha ordini associati. Cosa succede? 
+# Riesco a eliminarlo nonostante avesse ordini associati. Vengono eliminati anche gli ordini a suo carico
+DELETE FROM clienti
+WHERE id_cliente = 1;
+
+# Elimina un ordine specifico dalla tabella Ordini.
+# Viene eliminato l'ordine ma non il cliente a suo carico
+DELETE FROM ordini
+where id_ordine = 2;
+
+# 6. Test dei Vincoli (FOREIGN KEY, CHECK)
+
+# Prova a inserire un ordine con una quantità negativa. Il database lo permette? Perché?
+# Non lo consente perché il parametro check (quantita > 0) ne impedisce l'inserimento in quanto la richiesta non è soddisfatta
+insert into ordini (id_cliente, id_prodotto, quantita) values (2, 1, -5);
+
+# 7. Eliminazione Dati, Tabelle e Database
+
+# Elimina tutti gli ordini dalla tabella Ordini.
+delete from ordini;
+
+# Elimina la tabella Ordini, seguita dalle tabelle Clienti e Prodotti.
+drop table ordini;
+drop table clienti;
+drop table prodotti;
+
+# Rimuovi l'utente 'esercizio_user'.
+DROP USER 'esercizio_user'@'localhost';
+
+# Elimina il database EsercizioSQL.
+drop database eserciziosql;
