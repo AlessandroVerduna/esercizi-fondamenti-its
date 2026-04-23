@@ -16,11 +16,21 @@ def logica(tupla_in_locale, valore_locale):
         elemento[-1] = valore_locale
     return tupla_in_locale
 
+def controllo_liste(tupla_local):
+    for elemento in tupla_local:
+        if isinstance(elemento, list):
+            return True
+        else:
+            return False
+
 def main():
-    tupla_in = ([10, 20, 40], [40, 50, 60], [70, 80, 90])
+    tupla_in = ([10, 20, 40], {40, 50, 60}, [70, 80, 90])
     valore = int(input("Inserisci un valore che inserirò come ultimo nelle liste contenuto nella tupla: "))
-    tupla_processata = logica(tupla_in, valore)
-    print(f"Questa era la tupla iniziale: {tupla_in} mentre questa è la tupla processata: {tupla_processata}")
+    if controllo_liste(tupla_in):
+        tupla_processata = logica(tupla_in, valore)
+        print(f"Questa era la tupla iniziale: {tupla_in} mentre questa è la tupla processata: {tupla_processata}")
+    else:
+        print("La tupla fornita non conteneva solo liste. INSERIRE SOLO LISTE")
     
 if __name__ == "__main__":
     main()
