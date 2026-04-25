@@ -3,9 +3,9 @@
     "voto_min": 1,
     "voto_max": 10,
     "materie": [
-        "Matematica",
-        "Informatica",
-        "Italiano"
+        "matematica",
+        "informatica",
+        "italiano"
     ],
     "classe": "5A",
     "nomi": [

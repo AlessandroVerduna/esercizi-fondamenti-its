@@ -1,0 +1,5 @@
+Mario, Rossi, 4 
+Mario, Bianchi, 5 
+Gianni, Bianchi, 6 
+Alessandro, Rossi, 3.67 
+Mario, Rossi, 6.67 
