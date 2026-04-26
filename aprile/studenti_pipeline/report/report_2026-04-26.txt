@@ -1,0 +1,33 @@
+REPORT FINALE CLASSE 5A
+Data generazione: 2026-04-26 12:29
+
+Numero studenti totali: 20
+Studenti validi: 17
+Studenti scartati: 3
+
+STATISTICHE PER MATERIA:
+  - matematica:
+      media:   5.82
+      mediana: 6
+      min:     2
+      max:     10
+      stdev:   2.4
+  - informatica:
+      media:   5.59
+      mediana: 5
+      min:     2
+      max:     10
+      stdev:   2.6
+  - italiano:
+      media:   6.71
+      mediana: 7
+      min:     2
+      max:     10
+      stdev:   2.91
+
+TOP 5 STUDENTI MIGLIORI:
+Pippo, Bianchi, 5.67 
+Alessandro, Bianchi, 5.67 
+Sara, Bianchi, 6.67 
+Pippo, Bianchi, 8.33 
+Alessandro, Rossi, 8.67

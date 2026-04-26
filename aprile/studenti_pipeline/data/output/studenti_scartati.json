@@ -1,0 +1,32 @@
+[
+    {
+        "id": "5",
+        "nome": "Sara",
+        "cognome": "Rossi",
+        "data_nascita": "2004-02-03",
+        "email": "sara.rossi@scuola.it",
+        "matematica": "2",
+        "informatica": "1",
+        "italiano": "8"
+    },
+    {
+        "id": "8",
+        "nome": "Pippo",
+        "cognome": "Rossi",
+        "data_nascita": "2006-01-26",
+        "email": "pippo.rossi@scuola.it",
+        "matematica": "1",
+        "informatica": "7",
+        "italiano": "1"
+    },
+    {
+        "id": "13",
+        "nome": "Sara",
+        "cognome": "Bianchi",
+        "data_nascita": "2005-02-18",
+        "email": "sara.bianchi@scuola.it",
+        "matematica": "3",
+        "informatica": "1",
+        "italiano": "10"
+    }
+]

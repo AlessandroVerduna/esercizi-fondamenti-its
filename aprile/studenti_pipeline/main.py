@@ -1,4 +1,4 @@
-import os,json, datetime, csv, re, statistics, shutil, sys
+import os,json, datetime, csv, re, statistics, shutil, sys, textwrap
 
 from dataclasses import dataclass
 from studente import Studente
@@ -118,6 +118,8 @@ def leggi_e_controlla_csv():
 # 5. Conversione CSV → JSON
     with open("data/output/studenti_validi.json", "w", encoding="utf-8") as f:
         json.dump(lista_validi, f, indent=4, ensure_ascii=False)
+    with open("data/output/studenti_scartati.json", "w", encoding="utf-8") as f:
+        json.dump(lista_scartati, f, indent=4, ensure_ascii=False)
 
 # 6. Calcolo statistiche per materia
 def statistiche():
@@ -168,9 +170,53 @@ def classifica_migliori():
 
 # 8. Report finale
 def report_finale():
-    oggi_data = datetime.datetime.now().strftime('%Y-%m-%d')
-    with open(f"report/report_{oggi_data}.txt", "w", encoding="utf-8") as f:
-        f.write("prova")
+    with open("config.json", "r", encoding="utf-8") as f:
+        config = json.load(f)
+
+    classe = config["classe"]
+
+    with open("data/output/studenti_validi.json", "r", encoding="utf-8") as f:
+        studenti_validi = json.load(f)
+
+    numero_totale = config["numero_studenti"]
+    numero_validi = len(studenti_validi)
+    numero_scartati = numero_totale - numero_validi
+
+    with open("statistiche.json", "r", encoding="utf-8") as f:
+        stats = json.load(f)
+
+    top5_path = "data/output/studenti_top5.txt"
+    if os.path.exists(top5_path):
+        with open(top5_path, "r", encoding="utf-8") as f:
+            top5 = f.read().strip()
+    else:
+        top5 = "Nessun dato disponibile."
+
+    oggi = datetime.datetime.now().strftime("%Y-%m-%d")
+
+    contenuto = []
+    contenuto.append(f"REPORT FINALE CLASSE {classe}")
+    contenuto.append(f"Data generazione: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    contenuto.append("")
+    contenuto.append(f"Numero studenti totali: {numero_totale}")
+    contenuto.append(f"Studenti validi: {numero_validi}")
+    contenuto.append(f"Studenti scartati: {numero_scartati}")
+    contenuto.append("")
+    contenuto.append("STATISTICHE PER MATERIA:")
+    for materia, valori in stats.items():
+        contenuto.append(f"  - {materia}:")
+        contenuto.append(f"      media:   {round(valori['media'], 2)}")
+        contenuto.append(f"      mediana: {round(valori['mediana'], 2)}")
+        contenuto.append(f"      min:     {valori['min']}")
+        contenuto.append(f"      max:     {valori['max']}")
+        contenuto.append(f"      stdev:   {round(valori['stdev'], 2)}")
+    contenuto.append("")
+    contenuto.append("TOP 5 STUDENTI MIGLIORI:")
+    contenuto.append(top5)
+
+    report_path = f"report/report_{oggi}.txt"
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(contenuto))
 
 # 9. Backup automatico
 def backup_automatico():
@@ -179,27 +225,7 @@ def backup_automatico():
     # ora_corrente = ora_corrente.strftime('_%d-%m-%Y_%H-%M')
     shutil.copy(f"data/input/studenti{ora_corrente}.csv", f"data/backup/backup_studenti{ora_corrente}.csv")
 
-# def main():
-#     verificatore = True
-#     comando = input("Che azione vuoi eseguire? ")
-#     while verificatore:
-#         if comando == "all":
-#             inizializzazione_cartelle()
-#             inizializzazione_json()
-#             generazione_studenti_casuali()
-#             salvataggio_csv()
-#             leggi_e_controlla_csv()
-#             statistiche()
-#             classifica_migliori()
-#             report_finale()
-#             backup_automatico()
-
-#             comando = input("Che azione vuoi eseguire? ")
-#         elif comando == "q":
-#             verificatore = False
-#         else:
-#             comando = input("Che azione vuoi eseguire? ")
-
+# 10. Gestione CLI
 def main():
     if len(sys.argv) < 2:
         print("Errore: nessun comando fornito.")
@@ -209,6 +235,7 @@ def main():
     comando = sys.argv[1].lower()
 
     if comando == "all":
+        print("Esecuzione completa del programma")
         inizializzazione_cartelle()
         inizializzazione_json()
         generazione_studenti_casuali()
@@ -219,12 +246,26 @@ def main():
         report_finale()
         backup_automatico()
 
-    elif comando == "q":
-        print("Uscita dal programma.")
+    elif comando == "report":
+        print("Generazione report finale.")
+        report_finale()
+
+    elif comando == "generate":
+        print("Validazione ambiente, generazione studenti in formato CSV")
+        inizializzazione_cartelle()
+        inizializzazione_json()
+        generazione_studenti_casuali()
+        salvataggio_csv()
+
+    elif comando == "validate":
+        print("Verifica intregità CSV e creazione JSON")
+        leggi_e_controlla_csv()
+        statistiche()
+        classifica_migliori()
 
     else:
         print(f"Comando sconosciuto: {comando}")
-        print("Comandi disponibili: all, q")
+        print("Comandi disponibili: all, report, generate, validate")
 
 if __name__ == "__main__":
     main()
