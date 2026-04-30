@@ -1,0 +1,45 @@
+GET /api/v1/libri               ->  endpoint che restituisce intero catalogo dei libri
+GET /api/v1/libri/:id           ->  endpoint che restituisce il libro con id specifico(path variable) la risorsa è parte del path
+GET /api/v1/libri/search?titolo=:titolo    -> endpoint per cercare libri per titolo(prerogativa delle get) query parameter 
+GET /api/v1/libri/search?titolo=harry+potter&autore=rowling&anno=1997  -> esempio. posso concatenare più parametri con &
+GET /api/v1/libri/generi        -> endpoint che restituisce l'elenco dei generi dei libri in catalogo
+
+POST /api/v1/libri              -> endpoint per aggiungere un nuovo libro
+
+PUT /api/v1/libri/:id           -> endpoint per modificare un seingolo libro (oppure {id})
+
+DELETE /api/v1/libri/:{id}      -> endpoint per l'eliminazione di una riorsa
+
+PATCH /api/v1/libri/{id}        -> endpoint per aggiornar singoli campi
+
+es : http://localhost:3000/api/v1/libri?titolo=corso 
+
+
+GET /api/v1/clienti?nome=:nome -> ricerca signolo nome per path variable
+GET /api/v1/clienti/:id 
+GET /api/v1/clienti/cognome
+GET /api/v1/clienti/eta
+GET /api/v1/clienti/listaOrdini
+
+ 
+POST /api/v1/clienti/:id
+POST /api/v1/clienti/cognome
+POST /api/v1/clienti/eta
+POST /api/v1/clienti/listaOrdini
+ 
+PUT /api/v1/clienti/:id
+PUT /api/v1/clienti/cognome
+PUT /api/v1/clienti/eta
+PUT /api/v1/clienti/listaOrdini
+ 
+DELETE /api/v1/clienti/cognome
+DELETE /api/v1/clienti/:id
+DELETE /api/v1/clienti/eta
+DELETE /api/v1/clienti/listaOrdini
+
+Obiettivo	                    Come si fa
+Filtrare per più campi	        Query params
+Aggiornare più campi	        PATCH con JSON
+Cercare con più condizioni	    Query params multipli
+Evitare endpoint duplicati	    Un solo endpoint per risorsa
+Evitare concatenazioni	        Una richiesta ben formata

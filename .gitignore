@@ -10,4 +10,6 @@ crash.log
 # Sensitive files
 *.tfvars
 
-__pychache__/*
+node_modules/
+
+__pychache__/
