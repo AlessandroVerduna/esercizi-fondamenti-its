@@ -6,6 +6,8 @@ import { SELECT_ALL, SELECT_BY_ID, SELECT_BY_TITOLO,
 const libriRouter = express.Router();
 
 libriRouter.get("/", (req,res) => {
+    console.log("GET /api/v2/libri");
+
     db.all(SELECT_ALL, (err, rows) => {
         if (err) {
             res.status(500).json({ error: message });
@@ -15,10 +17,49 @@ libriRouter.get("/", (req,res) => {
     });
 });
 
+libriRouter.get("/:id", (req,res) => {
+    console.log(`GET /api/v2/libri/${req.params.id}`);
+
+    db.get(SELECT_BY_ID, [req.params.id], (err, row) => {
+        if (err) {
+            res.status(500).json({ erro: err.message });
+        } else if (row) {
+            res.json(row);
+        } else {
+            res.status(404).json({ error: "Libo non trovato" });
+        }
+    });
+});
+
+libriRouter.put("/:id", (req,res) => {
+    console.log(`PUT /api/v2/libri/${req.params.id}`);
+
+    const errorMessage = validaLibro(req.body);
+    if (errorMessage) {
+        res.status(400).json({ error: errorMessage });
+        return;
+    }
+    const id = req.params.id;
+    const { titolo, autore, editore, genere, numero_pagine } = req.body;
+
+    db.run(UPDATE_LIBRO, [titolo, autore, editore, genere, numero_pagine, id], function(err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+        } else if (this.changes > 0) {
+            res.json({ message: "Libro aggiornato con successo" });
+        } else {
+            res.status(404).json({ error: "Libro non trovato" });
+        }    
+    });
+});
+
 libriRouter.post("/", (req,res) => {
+    console.log("POST /api/v2/libri");
     // controllo che il body esista
-    if (!req.body) {
-        res.status(400).json({ error: "Libro non presente"});
+    const errorMessage = validaLibro(req.body);
+    if (errorMessage) {
+        res.status(400).json({ error: errorMessage });
+        return;
     }
 
     // estraggo le proprietà del body
@@ -31,5 +72,17 @@ libriRouter.post("/", (req,res) => {
         }
     })    
 });
+
+function validaLibro(libro) {
+    let errorMessage;
+
+    if (!libro) {
+       errorMessage = "Libro non presente";
+    } else if (isNaN(libro.numero_pagine)) {
+       errorMessage = "Il numero di pagine deve essere un numero";
+    }
+
+    return errorMessage;
+};
 
 export default libriRouter;
