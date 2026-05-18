@@ -40,7 +40,6 @@ def main():
 
     Restituisce: stampa il dizionario creato dalla stringa
     """
-
     stringa = 'Tanto va la gatta al lardo che ci lascia lo zampino'
 
     dizionario = logica(stringa)
