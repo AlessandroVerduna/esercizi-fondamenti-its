@@ -1,0 +1,39 @@
+------------------------------------------------------------DOMANDA 1------------------------------------------------------------
+Un errore di sintassi si verifica quando il programma non rispetta le regole formali del linguaggio Python, 
+ad esempio quando mancano parentesi, due punti o l’indentazione corretta. In questo caso il codice non 
+può essere eseguito e Python genera un messaggio di errore immediato. Un esempio è: print("Ciao" 
+dove manca la parentesi finale. Un errore logico, invece, si verifica quando il programma è sintatticamente 
+corretto e viene eseguito, ma produce un risultato sbagliato perché la logica implementata non corrisponde 
+a ciò che si voleva ottenere. Ad esempio, calcolare totale = prezzo * 2 quando l’intenzione 
+era sommare: totale = prezzo + 2. In questo caso il programma funziona, ma il risultato è errato.
+
+------------------------------------------------------------DOMANDA 2-----------------------------------------------------------
+In Python le eccezioni sono eventi anomali che interrompono il normale flusso di esecuzione di un programma, 
+ad esempio un accesso a un indice inesistente, una divisione per zero o la lettura di un file non trovato. 
+Per gestire queste situazioni senza far terminare il programma in modo brusco si utilizza la struttura try/except. 
+Il blocco try contiene il codice che potrebbe generare un errore, mentre il blocco except definisce cosa fare 
+se quell’errore si verifica, permettendo al programma di continuare a funzionare in modo controllato. 
+Ad esempio, se un’operazione rischia di fallire, Python prova ad eseguirla nel try e, in caso di eccezione, 
+passa automaticamente all’except, dove possiamo gestire l’errore con un messaggio o una soluzione alternativa.
+
+------------------------------------------------------------DOMANDA 3-----------------------------------------------------------
+Quando un file viene aperto con la sintassi with open(...) as f: significa che si sta utilizzando un context manager, 
+cioè una struttura che gestisce automaticamente l’apertura e la chiusura del file. Questo approccio è preferibile rispetto 
+all’uso di open() semplice perché garantisce che il file venga sempre chiuso correttamente, anche in caso di errori 
+durante l’esecuzione del codice. In questo modo si evitano problemi come file lasciati aperti, blocchi di risorse o perdita di dati. 
+Inoltre, il blocco with rende il codice più leggibile e sicuro, poiché delimita chiaramente l’area in cui il file è utilizzato.
+
+------------------------------------------------------------DOMANDA 4-----------------------------------------------------------
+Una funzione che usa print() mostra semplicemente un risultato a schermo, ma quel valore non può essere riutilizzato dal programma. 
+Al contrario, una funzione che utilizza return restituisce un dato al chiamante, permettendo di salvarlo in una variabile, 
+usarlo in calcoli successivi o combinarlo con altre funzioni. print() serve solo per l’output visivo nel terminale, 
+mentre return rende il risultato della funzione realmente utile all’interno della logica del programma, perché restituisce 
+un valore che può essere elaborato ulteriormente.
+
+------------------------------------------------------------DOMANDA 5-----------------------------------------------------------
+Il parsing di un file di log consiste nell’analizzare e interpretare ogni riga del file per estrarre informazioni utili, 
+come data, ora, indirizzo IP, URL richiesto o codice di stato. In pratica significa trasformare testo grezzo in dati 
+strutturati che possono essere contati, filtrati o aggregati. In ambito cloud il parsing è fondamentale perché permette 
+di monitorare il traffico, individuare errori, misurare le performance, rilevare anomalie di sicurezza e generare metriche 
+utili per l’osservabilità. Senza parsing, i log sarebbero solo testo difficile da interpretare; con il parsing diventano uno 
+strumento essenziale per diagnosticare problemi e ottimizzare i servizi.

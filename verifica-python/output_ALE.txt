@@ -1,0 +1,12 @@
+a server cloud deployment example with sequence abc hidden inside
+the system logs show a---b---c clearly separated but valid
+another line with abc in correct order but not consecutive
+a lot of noise text with b appearing before a and c missing
+production environment shows a b c spaced correctly and valid
+debug trace: abcabc repeated pattern in correct order
+cloud infrastructure scaling test a----b----c
+full sequence abc appears at the end of this long line
+broken sequence ab only partial match
+this line contains multiple sequences abc and abc again
+valid chain a1b2c3 embedded in structured data
+another correct abc sequence hidden in the middle of sentence
