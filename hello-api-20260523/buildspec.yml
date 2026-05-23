@@ -1,0 +1,30 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_DEFAULT_REGION: "us-east-1"        # regione del corso
+    IMAGE_REPO_NAME: "demo-hello-api"      # nome del repository ECR
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to ECR...
+      - ACCT=$(aws sts get-caller-identity --query Account --output text)
+      # get-caller-identity = chi sono? estrae l'account ID a 12 cifre
+      - REPO_URI=$ACCT.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
+      # REPO_URI = percorso completo ECR per tag e push
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPO_URI
+      # get-login-password = token ECR temporaneo
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      # CODEBUILD_RESOLVED_SOURCE_VERSION = SHA completo dal source
+      # cut -c 1-7 = prende i primi 7 caratteri (hash corto)
+  build:
+    commands:
+      - docker build -t $IMAGE_REPO_NAME:$COMMIT_HASH .
+      # costruisce l'immagine e la tagga con il commit hash
+  post_build:
+    commands:
+      - docker tag $IMAGE_REPO_NAME:$COMMIT_HASH $REPO_URI:$COMMIT_HASH
+      - docker push $REPO_URI:$COMMIT_HASH
+      # push = carica su ECR
+      - echo "Image pushed → $REPO_URI:$COMMIT_HASH"
