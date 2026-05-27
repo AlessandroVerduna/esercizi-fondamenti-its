@@ -17,6 +17,25 @@ libriRouter.get("/", (req,res) => {
     });
 });
 
+libriRouter.get("/search", (req,res) => {
+    const titolo = req.query.titolo;
+    console.log(`GET /api/v2/libri/${titolo}`);
+
+    if (!titolo) {
+        res.status(400).json({ error: "Parametro titolo non valido" });
+        return;
+    }
+
+    db.all(SELECT_BY_TITOLO, [titolo], (err,rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
 libriRouter.get("/:id", (req,res) => {
     console.log(`GET /api/v2/libri/${req.params.id}`);
 
@@ -26,7 +45,7 @@ libriRouter.get("/:id", (req,res) => {
         } else if (row) {
             res.json(row);
         } else {
-            res.status(404).json({ error: "Libo non trovato" });
+            res.status(404).json({ error: "Libro non trovato" });
         }
     });
 });
@@ -73,12 +92,27 @@ libriRouter.post("/", (req,res) => {
     })    
 });
 
+libriRouter.delete("/:id", (req,res) => {
+    const id = req.params.id; 
+    console.log(`DELETE /api/v2/libri/${id}`);
+
+    db.run(DELETE_LIBRO, [id], function(err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+        } else if (this.changes === 0) {
+            res.status(404).json({ message: "Libron non presente in database" });
+        } else {
+            res.status(200).json({ message: "Libro canecellato con successo" });
+        }
+    });
+});
+
 function validaLibro(libro) {
     let errorMessage;
 
     if (!libro) {
        errorMessage = "Libro non presente";
-    } else if (isNaN(libro.numero_pagine)) {
+    } else if (libro.numero_pagine && isNaN(libro.numero_pagine)) {
        errorMessage = "Il numero di pagine deve essere un numero";
     }
 
