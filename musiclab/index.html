@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicLab - Gestione Collezione Musicale</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .main-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            margin: 30px 0;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-weight: bold;
+        }
+        .nav-tabs .nav-link {
+            color: #667eea;
+            border-color: transparent;
+            font-weight: 500;
+        }
+        .nav-tabs .nav-link.active {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: transparent;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .song-row {
+            transition: background-color 0.2s;
+        }
+        .song-row:hover {
+            background-color: #f8f9fa;
+        }
+        .playlist-card {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .playlist-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .badge-playlist {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+        .action-buttons {
+            white-space: nowrap;
+        }
+        .btn-sm {
+            margin: 0 2px;
+        }
+        .songs-table {
+            font-size: 0.95rem;
+        }
+        .playlist-songs-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-lg py-4">
+        <div class="main-container">
+            <!-- Header -->
+            <div class="header">
+                <h1><i class="bi bi-music-note-beamed"></i> MusicLab</h1>
+                <p class="mb-0">Gestione della tua Collezione Musicale</p>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="px-4 pt-4">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="songs-tab" data-bs-toggle="tab" data-bs-target="#songs-section" type="button" role="tab" aria-controls="songs-section" aria-selected="true">
+                            <i class="bi bi-disc"></i> Canzoni
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="playlists-tab" data-bs-toggle="tab" data-bs-target="#playlists-section" type="button" role="tab" aria-controls="playlists-section" aria-selected="false">
+                            <i class="bi bi-collection-play"></i> Playlist
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content p-4">
+                <!-- Songs Section -->
+                <div class="tab-pane fade show active" id="songs-section" role="tabpanel" aria-labelledby="songs-tab">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2><i class="bi bi-disc"></i> Gestione Canzoni</h2>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#songModal" onclick="resetSongForm()">
+                            <i class="bi bi-plus-circle"></i> Aggiungi Canzone
+                        </button>
+                    </div>
+
+                    <!-- Search/Filter -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="songSearchTitle" placeholder="Cerca per titolo...">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="songSearchArtist" placeholder="Cerca per artista...">
+                        </div>
+                    </div>
+
+                    <!-- Songs Table -->
+                    <div class="table-responsive">
+                        <table class="table table-hover songs-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Titolo</th>
+                                    <th>Artista</th>
+                                    <th>Album</th>
+                                    <th>Genere</th>
+                                    <th>Anno</th>
+                                    <th>Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody id="songsTableBody">
+                                <!-- Populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="emptySongsState" class="empty-state">
+                        <i class="bi bi-music-note"></i>
+                        <p>Nessuna canzone trovata</p>
+                    </div>
+                </div>
+
+                <!-- Playlists Section -->
+                <div class="tab-pane fade" id="playlists-section" role="tabpanel" aria-labelledby="playlists-tab">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2><i class="bi bi-collection-play"></i> Gestione Playlist</h2>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#playlistModal" onclick="resetPlaylistForm()">
+                            <i class="bi bi-plus-circle"></i> Nuova Playlist
+                        </button>
+                    </div>
+
+                    <div id="playlistsContainer" class="row">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    <div id="emptyPlaylistsState" class="empty-state">
+                        <i class="bi bi-collection-play"></i>
+                        <p>Nessuna playlist creata. Inizia creandone una!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Song Modal -->
+    <div class="modal fade" id="songModal" tabindex="-1" aria-labelledby="songModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="songModalLabel">Aggiungi/Modifica Canzone</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="songForm">
+                        <input type="hidden" id="songId">
+                        <div class="mb-3">
+                            <label for="songTitle" class="form-label">Titolo *</label>
+                            <input type="text" class="form-control" id="songTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="songArtist" class="form-label">Artista *</label>
+                            <input type="text" class="form-control" id="songArtist" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="songAlbum" class="form-label">Album</label>
+                            <input type="text" class="form-control" id="songAlbum">
+                        </div>
+                        <div class="mb-3">
+                            <label for="songGenre" class="form-label">Genere</label>
+                            <input type="text" class="form-control" id="songGenre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="songYear" class="form-label">Anno</label>
+                            <input type="number" class="form-control" id="songYear" min="1900" max="2099">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-primary" onclick="saveSong()">Salva</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Playlist Modal -->
+    <div class="modal fade" id="playlistModal" tabindex="-1" aria-labelledby="playlistModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="playlistModalLabel">Aggiungi/Modifica Playlist</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="playlistForm">
+                        <input type="hidden" id="playlistId">
+                        <div class="mb-3">
+                            <label for="playlistName" class="form-label">Nome Playlist *</label>
+                            <input type="text" class="form-control" id="playlistName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="playlistDescription" class="form-label">Descrizione</label>
+                            <textarea class="form-control" id="playlistDescription" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-primary" onclick="savePlaylist()">Salva</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Playlist Detail Modal -->
+    <div class="modal fade" id="playlistDetailModal" tabindex="-1" aria-labelledby="playlistDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="playlistDetailModalLabel">Dettagli Playlist</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="playlistDetailContent">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Song to Playlist Modal -->
+    <div class="modal fade" id="addSongToPlaylistModal" tabindex="-1" aria-labelledby="addSongToPlaylistModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSongToPlaylistModalLabel">Aggiungi Canzone a Playlist</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="songSelectForPlaylist" class="form-label">Seleziona Canzone *</label>
+                        <select class="form-select" id="songSelectForPlaylist" required>
+                            <option value="">-- Seleziona una canzone --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-primary" onclick="addSongToPlaylist()">Aggiungi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const API_BASE = 'http://localhost:3000/api/v2';
+        let currentPlaylistForSong = null;
+        let allSongs = [];
+        let allPlaylists = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSongs();
+            loadPlaylists();
+            setupSearchListeners();
+        });
+
+        // ==================== SONGS ====================
+
+        function loadSongs(title = '', artist = '') {
+            let url = `${API_BASE}/songs`;
+            const params = new URLSearchParams();
+            if (title) params.append('title', title);
+            if (artist) params.append('artist', artist);
+            if (params.toString()) url += '?' + params.toString();
+
+            fetch(url)
+                .then(res => res.json())
+                .then(songs => {
+                    allSongs = songs;
+                    renderSongsTable(songs);
+                })
+                .catch(err => {
+                    console.error('Error loading songs:', err);
+                    showAlert('Errore nel caricamento delle canzoni', 'danger');
+                });
+        }
+
+        function renderSongsTable(songs) {
+            const tbody = document.getElementById('songsTableBody');
+            const emptyState = document.getElementById('emptySongsState');
+
+            if (songs.length === 0) {
+                tbody.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            tbody.innerHTML = songs.map(song => `
+                <tr class="song-row">
+                    <td>${escapeHtml(song.title)}</td>
+                    <td>${escapeHtml(song.artist)}</td>
+                    <td>${song.album ? escapeHtml(song.album) : '-'}</td>
+                    <td>${song.genre ? escapeHtml(song.genre) : '-'}</td>
+                    <td>${song.year || '-'}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn btn-sm btn-warning" onclick="editSong(${song.id})">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteSong(${song.id})">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function resetSongForm() {
+            document.getElementById('songForm').reset();
+            document.getElementById('songId').value = '';
+            document.getElementById('songModalLabel').textContent = 'Aggiungi Canzone';
+        }
+
+        function editSong(id) {
+            fetch(`${API_BASE}/songs/${id}`)
+                .then(res => res.json())
+                .then(song => {
+                    document.getElementById('songId').value = song.id;
+                    document.getElementById('songTitle').value = song.title;
+                    document.getElementById('songArtist').value = song.artist;
+                    document.getElementById('songAlbum').value = song.album || '';
+                    document.getElementById('songGenre').value = song.genre || '';
+                    document.getElementById('songYear').value = song.year || '';
+                    document.getElementById('songModalLabel').textContent = 'Modifica Canzone';
+                    new bootstrap.Modal(document.getElementById('songModal')).show();
+                })
+                .catch(err => {
+                    console.error('Error loading song:', err);
+                    showAlert('Errore nel caricamento della canzone', 'danger');
+                });
+        }
+
+        function saveSong() {
+            const id = document.getElementById('songId').value;
+            const data = {
+                title: document.getElementById('songTitle').value,
+                artist: document.getElementById('songArtist').value,
+                album: document.getElementById('songAlbum').value || null,
+                genre: document.getElementById('songGenre').value || null,
+                year: document.getElementById('songYear').value ? parseInt(document.getElementById('songYear').value) : null
+            };
+
+            if (!data.title || !data.artist) {
+                showAlert('Titolo e Artista sono obbligatori', 'warning');
+                return;
+            }
+
+            const method = id ? 'PUT' : 'POST';
+            const url = id ? `${API_BASE}/songs/${id}` : `${API_BASE}/songs`;
+
+            fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.error) {
+                        showAlert(result.error, 'danger');
+                    } else {
+                        showAlert(id ? 'Canzone modificata con successo' : 'Canzone aggiunta con successo', 'success');
+                        bootstrap.Modal.getInstance(document.getElementById('songModal')).hide();
+                        loadSongs();
+                    }
+                })
+                .catch(err => {
+                    console.error('Error saving song:', err);
+                    showAlert('Errore nel salvataggio della canzone', 'danger');
+                });
+        }
+
+        function deleteSong(id) {
+            if (confirm('Sei sicuro di voler eliminare questa canzone?')) {
+                fetch(`${API_BASE}/songs/${id}`, { method: 'DELETE' })
+                    .then(res => res.json())
+                    .then(result => {
+                        if (result.error) {
+                            showAlert(result.error, 'danger');
+                        } else {
+                            showAlert('Canzone eliminata con successo', 'success');
+                            loadSongs();
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error deleting song:', err);
+                        showAlert('Errore nell\'eliminazione della canzone', 'danger');
+                    });
+            }
+        }
+
+        function setupSearchListeners() {
+            const titleInput = document.getElementById('songSearchTitle');
+            const artistInput = document.getElementById('songSearchArtist');
+
+            const performSearch = () => {
+                loadSongs(titleInput.value, artistInput.value);
+            };
+
+            titleInput.addEventListener('input', performSearch);
+            artistInput.addEventListener('input', performSearch);
+        }
+
+        // ==================== PLAYLISTS ====================
+
+        function loadPlaylists() {
+            fetch(`${API_BASE}/playlists`)
+                .then(res => res.json())
+                .then(playlists => {
+                    // Fetch full details for each playlist to get song count
+                    const detailPromises = playlists.map(p =>
+                        fetch(`${API_BASE}/playlists/${p.id}`)
+                            .then(res => res.json())
+                            .then(fullPlaylist => ({
+                                ...p,
+                                songCount: (fullPlaylist.songs || []).length
+                            }))
+                    );
+                    return Promise.all(detailPromises);
+                })
+                .then(playlistsWithCounts => {
+                    allPlaylists = playlistsWithCounts;
+                    renderPlaylists(playlistsWithCounts);
+                })
+                .catch(err => {
+                    console.error('Error loading playlists:', err);
+                    showAlert('Errore nel caricamento delle playlist', 'danger');
+                });
+        }
+
+        function renderPlaylists(playlists) {
+            const container = document.getElementById('playlistsContainer');
+            const emptyState = document.getElementById('emptyPlaylistsState');
+
+            if (playlists.length === 0) {
+                container.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            container.innerHTML = playlists.map(playlist => `
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card playlist-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-collection-play"></i> ${escapeHtml(playlist.name)}</h5>
+                            <p class="card-text text-muted">${playlist.description ? escapeHtml(playlist.description) : 'Nessuna descrizione'}</p>
+                            <span class="badge badge-playlist">${playlist.songCount || 0} canzoni</span>
+                        </div>
+                        <div class="card-footer bg-white border-top">
+                            <button class="btn btn-sm btn-info me-2" onclick="viewPlaylistDetails(${playlist.id})">
+                                <i class="bi bi-eye"></i> Visualizza
+                            </button>
+                            <button class="btn btn-sm btn-warning me-2" onclick="editPlaylist(${playlist.id})">
+                                <i class="bi bi-pencil"></i> Modifica
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="deletePlaylist(${playlist.id})">
+                                <i class="bi bi-trash"></i> Elimina
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function viewPlaylistDetails(playlistId) {
+            fetch(`${API_BASE}/playlists/${playlistId}`)
+                .then(res => res.json())
+                .then(playlist => {
+                    const content = document.getElementById('playlistDetailContent');
+                    const songs = playlist.songs || [];
+                    
+                    content.innerHTML = `
+                        <h6 class="mb-3">${escapeHtml(playlist.name)}</h6>
+                        <p class="text-muted">${playlist.description ? escapeHtml(playlist.description) : 'Nessuna descrizione'}</p>
+                        <hr>
+                        <h6>Canzoni nella playlist (${songs.length}):</h6>
+                        <div class="playlist-songs-list">
+                            ${songs.length > 0 ? `
+                                <div class="list-group">
+                                    ${songs.map(song => `
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <strong>${escapeHtml(song.title)}</strong><br>
+                                                <small class="text-muted">${escapeHtml(song.artist)}</small>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-danger" onclick="removeSongFromPlaylist(${playlistId}, ${song.id})">
+                                                <i class="bi bi-x"></i>
+                                            </button>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : `
+                                <p class="text-muted">Nessuna canzone in questa playlist</p>
+                            `}
+                        </div>
+                        <div class="mt-3">
+                            <button class="btn btn-sm btn-primary" onclick="showAddSongToPlaylistModal(${playlistId})">
+                                <i class="bi bi-plus"></i> Aggiungi Canzone
+                            </button>
+                        </div>
+                    `;
+                    new bootstrap.Modal(document.getElementById('playlistDetailModal')).show();
+                })
+                .catch(err => {
+                    console.error('Error loading playlist details:', err);
+                    showAlert('Errore nel caricamento dei dettagli della playlist', 'danger');
+                });
+        }
+
+        function resetPlaylistForm() {
+            document.getElementById('playlistForm').reset();
+            document.getElementById('playlistId').value = '';
+            document.getElementById('playlistModalLabel').textContent = 'Crea Nuova Playlist';
+        }
+
+        function editPlaylist(id) {
+            const playlist = allPlaylists.find(p => p.id === id);
+            if (playlist) {
+                document.getElementById('playlistId').value = playlist.id;
+                document.getElementById('playlistName').value = playlist.name;
+                document.getElementById('playlistDescription').value = playlist.description || '';
+                document.getElementById('playlistModalLabel').textContent = 'Modifica Playlist';
+                new bootstrap.Modal(document.getElementById('playlistModal')).show();
+            }
+        }
+
+        function savePlaylist() {
+            const id = document.getElementById('playlistId').value;
+            const data = {
+                name: document.getElementById('playlistName').value,
+                description: document.getElementById('playlistDescription').value || null
+            };
+
+            if (!data.name) {
+                showAlert('Il nome della playlist è obbligatorio', 'warning');
+                return;
+            }
+
+            const method = id ? 'PUT' : 'POST';
+            const url = id ? `${API_BASE}/playlists/${id}` : `${API_BASE}/playlists`;
+
+            fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.error) {
+                        showAlert(result.error, 'danger');
+                    } else {
+                        showAlert(id ? 'Playlist modificata con successo' : 'Playlist creata con successo', 'success');
+                        bootstrap.Modal.getInstance(document.getElementById('playlistModal')).hide();
+                        loadPlaylists();
+                    }
+                })
+                .catch(err => {
+                    console.error('Error saving playlist:', err);
+                    showAlert('Errore nel salvataggio della playlist', 'danger');
+                });
+        }
+
+        function deletePlaylist(id) {
+            if (confirm('Sei sicuro di voler eliminare questa playlist?')) {
+                fetch(`${API_BASE}/playlists/${id}`, { method: 'DELETE' })
+                    .then(res => res.json())
+                    .then(result => {
+                        if (result.error) {
+                            showAlert(result.error, 'danger');
+                        } else {
+                            showAlert('Playlist eliminata con successo', 'success');
+                            loadPlaylists();
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error deleting playlist:', err);
+                        showAlert('Errore nell\'eliminazione della playlist', 'danger');
+                    });
+            }
+        }
+
+        function showAddSongToPlaylistModal(playlistId) {
+            currentPlaylistForSong = playlistId;
+            const select = document.getElementById('songSelectForPlaylist');
+            select.innerHTML = '<option value="">-- Seleziona una canzone --</option>';
+            select.innerHTML += allSongs.map(song => `
+                <option value="${song.id}">${escapeHtml(song.title)} - ${escapeHtml(song.artist)}</option>
+            `).join('');
+            new bootstrap.Modal(document.getElementById('addSongToPlaylistModal')).show();
+        }
+
+        function addSongToPlaylist() {
+            const songId = document.getElementById('songSelectForPlaylist').value;
+            if (!songId) {
+                showAlert('Seleziona una canzone', 'warning');
+                return;
+            }
+
+            fetch(`${API_BASE}/playlists/${currentPlaylistForSong}/songs`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ song_id: parseInt(songId) })
+            })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.error) {
+                        showAlert(result.error, 'danger');
+                    } else {
+                        showAlert('Canzone aggiunta alla playlist', 'success');
+                        bootstrap.Modal.getInstance(document.getElementById('addSongToPlaylistModal')).hide();
+                        loadPlaylists();
+                        viewPlaylistDetails(currentPlaylistForSong);
+                    }
+                })
+                .catch(err => {
+                    console.error('Error adding song to playlist:', err);
+                    showAlert('Errore nell\'aggiunta della canzone', 'danger');
+                });
+        }
+
+        function removeSongFromPlaylist(playlistId, songId) {
+            if (confirm('Rimuovere questa canzone dalla playlist?')) {
+                fetch(`${API_BASE}/playlists/${playlistId}/songs/${songId}`, { method: 'DELETE' })
+                    .then(res => res.json())
+                    .then(result => {
+                        if (result.error) {
+                            showAlert(result.error, 'danger');
+                        } else {
+                            showAlert('Canzone rimossa dalla playlist', 'success');
+                            loadPlaylists();
+                            viewPlaylistDetails(playlistId);
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error removing song from playlist:', err);
+                        showAlert('Errore nella rimozione della canzone', 'danger');
+                    });
+            }
+        }
+
+        // ==================== UTILITIES ====================
+
+        function showAlert(message, type = 'info') {
+            const alertId = 'alert-' + Date.now();
+            const alertDiv = document.createElement('div');
+            alertDiv.id = alertId;
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.setAttribute('role', 'alert');
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+
+            const container = document.body;
+            container.appendChild(alertDiv);
+
+            setTimeout(() => {
+                const alert = document.getElementById(alertId);
+                if (alert) {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }
+            }, 5000);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+    </script>
+</body>
+</html>

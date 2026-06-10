@@ -1,0 +1,46 @@
+import express from 'express';
+import bodyParser from 'body-parser';
+import sqlite3 from 'sqlite3';
+// import swaggerUi from 'swagger-ui-express';
+// import swaggerDocument from './doc/swagger.json' with {type: "json"};
+import { CREATE_SONGS_TABLE } from './db.js';
+import songRouter from './routes/songRouter.js';
+import cors from 'cors';
+
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+
+const PORT = 3000;
+const BASE_PATH = '/api/v2';
+
+export const db = new sqlite3.Database("database.db");
+
+// Inizializzazione rotte
+app.use(`${BASE_PATH}/songs`, songRouter);
+
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+// attivo il listener dell'applicazione sulla porta 3000
+app.listen(PORT, () => {
+    console.log(`Server attivo sulla porta ${PORT}`);
+    initializeDatabase();
+});
+
+// endpoint di prova
+app.get("/", (req,res) => {
+    res.send("Benvenuto nella tua libreria Online!");
+});
+
+// Utilities
+function initializeDatabase() {
+    console.log("Inizializzazione DB...");
+
+    db.exec(CREATE_SONGS_TABLE, (err) => {
+        if (err) {
+            console.log("Errore durante la creazione della tabella libri: ", err);
+        } else {
+            console.log("Tabella libri inizializzata correttamente");
+        }
+    });
+}
